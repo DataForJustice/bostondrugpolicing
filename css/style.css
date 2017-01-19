@@ -4,10 +4,6 @@ body,html {
 	margin: 0;
 	padding: 0;
 }
-#movie {
-	height: 100%;
-	width: 50%;
-}
 .scene {
 	height: 70%;
 	border-bottom: 1px dashed rgba(0,0,0,0.1);
@@ -19,6 +15,10 @@ body,html {
 		width: 100%;
 		top: 0; left: 0;
 	}
+	#movie {
+		height: 100%;
+		width: 100%;
+	}
 }
 @media all and (orientation: landscape) {
 	#fixed {
@@ -27,6 +27,10 @@ body,html {
 		width: 50%;
 		top: 0; left: 50%;
 	}
+	#movie {
+		height: 100%;
+		width: 50%;
+	}
 }
 #fixed > div {
 	position: absolute;
@@ -34,6 +38,11 @@ body,html {
 	left: 0;
 	width: 100%;
 	height: 100%;
+	background-color: white;
+	visibility: hidden;
+}
+div.show { 
+	visibility: visible !important;
 }
 .blockgroups path { 
 	fill: none;

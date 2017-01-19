@@ -22,12 +22,8 @@
 	<link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-	<div id="fixed">
-		<div id="map" data-chart="map" data-map_center_lat="42.330128" data-map_center_lon="-71.067549" data-zoom_level="100000"></div>
-		<div id="photos"></div>
-	</div>
 	<div id="movie" data-movie data-trigger_position="0.7">
-		<div class="scene"><h1>Drug Policing in Boston in Black and White</h1></div>
+		<div class="scene" data-parse="#hide_map"><h1>Drug Policing in Boston in Black and White</h1></div>
 		<div class="scene" data-parse="#reset_blockgroups"><p>Let's explore the data from the 2014 census and the data produced daily by the Boston Police Department.</p></div>
 		<div class="scene" data-parse="#set_white"><p>46 percent of Boston’s population is white</p></div>
 		<div class="scene" data-parse="#set_black"><p>25 percent of Boston’s population is Black</p></div>
@@ -62,15 +58,21 @@
 		<div class="scene"><p>“We can’t arrest our way out of this” rhetoric is nice, but it doesn’t mean much if it’s not backed up by action.</p></div>
 		<div class="scene"><p>Let’s put our money where our mouth is and shift resources away from police and prisons, and towards public health.</p></div>
 	</div>
+	<div id="fixed">
+		<div id="map" data-chart="map" data-map_center_lat="42.330128" data-map_center_lon="-71.067549" data-zoom_level="100000"></div>
+		<div id="photos"></div>
+	</div>
 	<!-- controls -->
 	<a id="zoom_to_boston" data-control_chart="map" data-zoom_to=".blockgroups > path"></a>
+	<a id="show_map" data-control_element="#map" data-element_add_class="show"></a>
+	<a id="hide_map" data-control_element="#map" data-element_remove_class="show"></a>
 	<a id="blockgroups_to_bottom" data-control_element=".blockgroups" data-element_move_to="first"></a>
 	<a id="redraw_blockgroups" data-control_chart="map" data-add_layer="blockgroups" data-layer_key="stdin" data-parse="#zoom_to_boston,#blockgroups_to_bottom"></a>
 	<a id="download_blockgroups" data-onload data-download="data/blockgroups.json" data-download_id="blockgroups" data-type="json" data-download_parse_sequence="#redraw_blockgroups,#download_blockgroups_race" data-debug="download_blockgroups"></a>	
 	<a id="download_blockgroups_race" data-download="data/blockgroups.race.csv" data-download_id="blockgroups_race" data-download_parse_sequence="#quantify_blockgroups"></a>
 	<a id="quantify_blockgroups" data-control_chart="map" data-quantify="blockgroups" data-quantifier="blockgroups"></a>
 	<!-- viz -->
-	<a id="reset_blockgroups" data-control_element=".blockgroup" data-element_remove_class="white black poc opoc seg" data-parse="#reset_blockgroups_layer"></a>
+	<a id="reset_blockgroups" data-control_element=".blockgroup" data-element_remove_class="white black poc opoc seg" data-parse="#reset_blockgroups_layer,#show_map"></a>
 	<a id="reset_blockgroups_layer" data-control_element=".blockgroups" data-element_remove_class="default white black poc opoc seg"></a>
 	<a id="set_white" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="white"></a>
 	<a id="set_black" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="black"></a>
