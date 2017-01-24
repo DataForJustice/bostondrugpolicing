@@ -34,22 +34,22 @@
 		<div class="scene" data-parse="#set_white"><p>White </p></div>
 		<div class="scene" data-parse="#set_poc"><p>People of color</p></div>
 		<div class="scene" data-parse="#reset_blockgroups"><p>Now we look at where police harass and arrest people because of drugs.</p></div>
-		<div class="scene"><p>This is where drug policing incidents happened last week</p></div>
-		<div class="scene"><p>and this is where drug policing incidents happened since August 2015</p></div>
+		<div class="scene" data-parse="#incidents_last_week"><p>This is where drug policing incidents happened last week</p></div>
+		<div class="scene" data-parse="#total_incidents"><p>and this is where drug policing incidents happened since August 2015</p></div>
 		<div class="scene" data-parse="#reset_blockgroups"><p>Do you notice a pattern?</p></div>
 		<div class="scene" data-parse="#set_white"><p>White</p></div>
 		<div class="scene" data-parse="#set_poc"><p>People of color</p></div>
 		<div class="scene" data-parse="#set_white"><p>White </p></div>
 		<div class="scene" data-parse="#set_poc"><p>People of color</p></div>
 		<div class="scene" data-parse="#reset_blockgroups"><p>Now, let’s look at drug policing incidents by type</p></div>
-		<div class="scene"><p>Here are the drug policing incidents for possession of drugs</p></div>
-		<div class="scene"><p>And here are the drug policing incidents for manufacturing, sale, and/or distribution of drugs</p></div>
+		<div class="scene" data-parse="#incidents_possession"><p>Here are the drug policing incidents for possession of drugs</p></div>
+		<div class="scene" data-parse="#incidents_distribution"><p>And here are the drug policing incidents for manufacturing, sale, and/or distribution of drugs</p></div>
 		<div class="scene" data-parse="#reset_blockgroups"><p>Do you notice a pattern?</p></div>
 		<div class="scene" data-parse="#set_white"><p>White</p></div>
 		<div class="scene" data-parse="#set_poc"><p>People of color</p></div>
 		<div class="scene" data-parse="#set_white"><p>White </p></div>
 		<div class="scene" data-parse="#set_poc"><p>People of color</p></div>
-		<div class="scene" data-parse="#reset_blockgroups"><p>Politicians and law enforcement officials across Massachusetts now admit “we can’t arrest our way out of” drug problems. (show screenshot from article I sent you)</p></div>
+		<div class="scene" data-parse="#reset_blockgroups" data-debug="SCENE"><p>Politicians and law enforcement officials across Massachusetts now admit “we can’t arrest our way out of” drug problems. (show screenshot from article I sent you)</p></div>
 		<div class="scene"><p>Officials from both parties say that drug addiction is a public health—not criminal justice—problem.</p></div>
 		<div class="scene"><p>But despite all of this agreement, Massachusetts still invests ten times more money in policing, jails, prisons, courts, probation, and parole than we do in drug treatment. (show chart using fiscal year 2017 Massachusetts budget data)</p></div>
 		<div class="scene"><p>Just one arrest can permanently change one’s life for the worse, causing barriers to employment, schooling, and housing. (use data Carl sends to illustrate this)</p></div>
@@ -66,11 +66,18 @@
 	<a id="zoom_to_boston" data-control_chart="map" data-zoom_to=".blockgroups > path"></a>
 	<a id="show_map" data-control_element="#map" data-element_add_class="show"></a>
 	<a id="hide_map" data-control_element="#map" data-element_remove_class="show"></a>
+	<!-- blockgroups -->
 	<a id="blockgroups_to_bottom" data-control_element=".blockgroups" data-element_move_to="first"></a>
 	<a id="redraw_blockgroups" data-control_chart="map" data-add_layer="blockgroups" data-layer_key="stdin" data-parse="#zoom_to_boston,#blockgroups_to_bottom"></a>
-	<a id="download_blockgroups" data-onload data-download="data/blockgroups.json" data-download_id="blockgroups" data-type="json" data-download_parse_sequence="#redraw_blockgroups,#download_blockgroups_race" data-debug="download_blockgroups"></a>	
+	<a id="download_blockgroups" data-onload data-download="data/blockgroups.json" data-download_id="blockgroups" data-type="json" data-download_parse_sequence="#redraw_blockgroups,#download_blockgroups_race" data-parse="#download_grid"></a>	
 	<a id="download_blockgroups_race" data-download="data/blockgroups.race.csv" data-download_id="blockgroups_race" data-download_parse_sequence="#quantify_blockgroups"></a>
-	<a id="quantify_blockgroups" data-control_chart="map" data-quantify="blockgroups" data-quantifier="blockgroups"></a>
+	<a id="quantify_blockgroups" class="not_quantified" data-control_element="#quantify_blockgroups" data-element_remove_class="not_quantified" data-control_chart="map" data-quantify="blockgroups" data-quantifier="blockgroups"></a>
+	<!-- grid -->
+	<a id="clear_grid" data-control_chart="map" data-quantify="grid" data-quantifier="clear" ></a>
+	<a id="redraw_grid" data-control_chart="map" data-add_layer="grid" data-layer_key="stdin" data-layer_points data-parse="#clear_grid" data-debug="ADDED GRID"></a>
+	<a id="download_grid" data-download="data/grid.json" data-download_id="grid" data-type="json" data-download_parse_sequence="#redraw_grid,#download_incidents"></a>
+	<a id="download_incidents" data-download="data/incidents.csv" data-download_id="incidents" data-debug="downloading incidents" data-download_parse="#init_scroll"></a>
+	<a id="init_scroll" data-init_scroll></a>
 	<!-- viz -->
 	<a id="reset_blockgroups" data-control_element=".blockgroup" data-element_remove_class="white black poc opoc seg" data-parse="#reset_blockgroups_layer,#show_map"></a>
 	<a id="reset_blockgroups_layer" data-control_element=".blockgroups" data-element_remove_class="default white black poc opoc seg"></a>
@@ -79,6 +86,12 @@
 	<a id="set_poc" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="poc"></a>
 	<a id="set_opoc" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="opoc"></a>
 	<a id="set_seg" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="seg"></a>
+
+	<!-- incidents -->
+	<a id="total_incidents" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='total'></a>
+	<a id="incidents_last_week" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='incidents_last_week'></a>
+	<a id="incidents_possession" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"column": "total_possession", "comp": "total"}'></a>
+	<a id="incidents_distribution" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"column": "total_distribution", "comp": "total"}'></a>
 
 </body>
 </html>

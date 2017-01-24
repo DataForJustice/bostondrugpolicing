@@ -41,6 +41,11 @@ body,html {
 	background-color: white;
 	visibility: hidden;
 }
+circle {
+	fill: #f9300c; 
+	fill-opacity: 0.8;
+	stroke: #f9300c;
+}
 div.show { 
 	visibility: visible !important;
 }
@@ -80,3 +85,4 @@ div.show {
 .o_b.opoc { fill: #fdbe85; }
 .o_c.opoc { fill: #fd8d3c; }
 .o_d.opoc { fill: #d94701; }
+
