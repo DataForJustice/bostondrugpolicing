@@ -173,6 +173,10 @@ Ant.prototype = {
 			}
 		}
 
+		if (data.init_scroll !== undefined) { 
+			this.initScroll ();
+		}
+
 		/*
 		* charts and quantification
 		*/
@@ -1519,6 +1523,24 @@ ant.charts.map.topology = function (map,name, t, f) {
 		}
 	}
 }
+var asPie = function () {
+	this.redraw = function (d, quantifier) { 
+		var data = d.data;
+		d.scale.range ([0, 365]);
+		var cb = this.quantifierCallback (quantifier, function () { console.log (arguments); });
+
+		var g = this.svg.selectAll(".arc")
+			.data(data.items ())
+			.enter().append("g")
+			.each (function (d, e) {  cb (this, d.key, d.values, e); })
+			.attr("class", "arc");
+
+	}
+	return this;
+}
+ant.charts.pie = function (container, conf) { this.init (container, conf); }
+asChart.call (ant.charts.pie.prototype);
+asPie.call (ant.charts.pie.prototype);
 var asSunburst = function () {
 	this.redraw = function (d, quantifier) {
 		if (!d || !d.scale || !d.data) throw "no data, scale defined. they should be returned from the prequantifier {scale: d3.scaleLinear (), data: [...], children: function (a) { }, sum: function (a) { }}"; 
