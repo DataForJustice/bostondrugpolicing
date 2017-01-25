@@ -8,6 +8,13 @@ body,html {
 	height: 70%;
 	border-bottom: 1px dashed rgba(0,0,0,0.1);
 }
+#images img {
+	width: 100%;
+	height: auto;
+}
+.control.highlight {
+	color: #f9300c; 
+}
 @media all and (orientation: portrait) {
 	#fixed {
 		position: fixed;

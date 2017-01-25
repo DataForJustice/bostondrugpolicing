@@ -48,24 +48,59 @@
 		<div class="scene" data-parse="#set_white"><p>White</p></div>
 		<div class="scene" data-parse="#set_poc"><p>People of color</p></div>
 		<div class="scene" data-parse="#set_white"><p>White </p></div>
-		<div class="scene" data-parse="#set_poc"><p>People of color</p></div>
-		<div class="scene" data-parse="#reset_blockgroups" data-debug="SCENE"><p>Politicians and law enforcement officials across Massachusetts now admit “we can’t arrest our way out of” drug problems. (show screenshot from article I sent you)</p></div>
+		<div class="scene" data-parse="#set_poc,#hide_images"><p>People of color</p></div>
+		<div class="scene" data-parse="#hide_map,#show_images" data-control_element="#image" data-element_attrs='{"src":"img/screenshot.png"}'><p>Politicians and law enforcement officials across Massachusetts now admit “we can’t arrest our way out of” drug problems.</p></div>
 		<div class="scene"><p>Officials from both parties say that drug addiction is a public health—not criminal justice—problem.</p></div>
-		<div class="scene"><p>But despite all of this agreement, Massachusetts still invests ten times more money in policing, jails, prisons, courts, probation, and parole than we do in drug treatment. (show chart using fiscal year 2017 Massachusetts budget data)</p></div>
-		<div class="scene"><p>Just one arrest can permanently change one’s life for the worse, causing barriers to employment, schooling, and housing. (use data Carl sends to illustrate this)</p></div>
+		<div class="scene" data-control_element="#image" data-element_attrs='{"src": "img/chart.png"}'><p>But despite all of this agreement, Massachusetts still invests ten times more money in policing, jails, prisons, courts, probation, and parole than we do in drug treatment.</p></div>
+		<div class="scene"><p>Just one arrest can permanently change one’s life for the worse, causing barriers to employment, schooling, and housing.</p></div>
 		<div class="scene"><p>And a study from 2016 found that people are fifty times more likely to overdose just after they’re released from jail. (<a href="https://www.bostonglobe.com/metro/2016/09/15/most-overdose-deaths-massachusetts-caused-illegal-drugs/gPFUwRrRzSF3qGlXfP3VEK/story.html">citation</a>)</p></div>
-		<div class="scene"><p>Unfortunately, our public policy does not reflect any of these facts. Instead of helping people, we are caging them. (use image of prison cell?)</p></div>
+		<div class="scene" data-control_element="#image" data-element_attrs='{"src": "img/jailcell.jpg"}'><p>Unfortunately, our public policy does not reflect any of these facts. Instead of helping people, we are caging them. (use image of prison cell?)</p></div>
 		<div class="scene"><p>“We can’t arrest our way out of this” rhetoric is nice, but it doesn’t mean much if it’s not backed up by action.</p></div>
-		<div class="scene"><p>Let’s put our money where our mouth is and shift resources away from police and prisons, and towards public health.</p></div>
+		<div class="scene" data-parse="#hide_map,#show_images"><p>Let’s put our money where our mouth is and shift resources away from police and prisons, and towards public health.</p></div>
+		<div data-parse="#hide_images,#show_map">
+			<h2>Explore the data</h2>
+			<table>
+				<tr>
+					<th >Race</th>
+					<th colspan="2">Incidents</th>
+				</tr>
+				<tr>
+					<td>
+						<ul>
+							<li><a class="race control white" data-click data-parse="#set_white">White</a></li>
+							<li><a class="race control black" data-click data-parse="#set_black">Black</a></li>
+							<li><a class="race control opoc" data-click data-parse="#set_opoc">Other people of color</a></li>
+							<li><a class="race control poc" data-click data-parse="#set_poc">People of color</a></li>
+						</ul>
+					</td>
+					<td>
+						<ul>
+							<li><a class="incidents control all" data-click data-parse="#total_incidents">All incidents</a></li>
+							<li><a class="incidents control all_p" data-click data-parse="#incidents_possession">All possession incidents</a></li>
+							<li><a class="incidents control all_d" data-click data-parse="#incidents_distribution">All distribution incidents</a></li>
+							<li><a class="incidents control last_week" data-click data-parse="#incidents_last_week">Last week's incidents</a></li>
+							<li><a class="incidents control last_week_p" data-click data-parse="#incidents_last_week_possession">Last week's possession incidents</a></li>
+							<li><a class="incidents control last_week_d" data-click data-parse="#incidents_last_week_distribution">Last week's distribution incidents</a></li>
+						</ul>
+					</td>
+					<td>
+					</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 	<div id="fixed">
 		<div id="map" data-chart="map" data-map_center_lat="42.330128" data-map_center_lon="-71.067549" data-zoom_level="100000"></div>
-		<div id="photos"></div>
+		<div id="images">
+			<img id="image"/>
+		</div>
 	</div>
 	<!-- controls -->
 	<a id="zoom_to_boston" data-control_chart="map" data-zoom_to=".blockgroups > path"></a>
 	<a id="show_map" data-control_element="#map" data-element_add_class="show"></a>
 	<a id="hide_map" data-control_element="#map" data-element_remove_class="show"></a>
+	<a id="show_images" data-control_element="#images" data-element_add_class="show"></a>
+	<a id="hide_images" data-control_element="#images" data-element_remove_class="show"></a>
 	<!-- blockgroups -->
 	<a id="blockgroups_to_bottom" data-control_element=".blockgroups" data-element_move_to="first"></a>
 	<a id="redraw_blockgroups" data-control_chart="map" data-add_layer="blockgroups" data-layer_key="stdin" data-parse="#zoom_to_boston,#blockgroups_to_bottom"></a>
@@ -78,20 +113,38 @@
 	<a id="download_grid" data-download="data/grid.json" data-download_id="grid" data-type="json" data-download_parse_sequence="#redraw_grid,#download_incidents"></a>
 	<a id="download_incidents" data-download="data/incidents.csv" data-download_id="incidents" data-debug="downloading incidents" data-download_parse="#init_scroll"></a>
 	<a id="init_scroll" data-init_scroll></a>
+	<!-- controls -->
+	<a id="reset_race_controls" data-control_element=".race.control.highlight" data-element_remove_class="highlight"></a> 
+	<a id="control_white" data-parse_first="#reset_race_controls" data-control_element=".control.white" data-element_add_class="highlight"></a>
+	<a id="control_black" data-parse_first="#reset_race_controls" data-control_element=".control.black" data-element_add_class="highlight"></a>
+	<a id="control_opoc" data-parse_first="#reset_race_controls" data-control_element=".control.opoc" data-element_add_class="highlight"></a>
+	<a id="control_poc" data-parse_first="#reset_race_controls" data-control_element=".control.poc" data-element_add_class="highlight"></a>
+	
+	<a id="reset_incidents_controls" data-control_element=".incidents.control.highlight" data-element_remove_class="highlight"></a>
+	<a id="control_all" data-parse_first="#reset_incidents_controls" data-control_element=".control.all" data-element_add_class="highlight"></a>
+	<a id="control_all_p" data-parse_first="#reset_incidents_controls" data-control_element=".control.all_p" data-element_add_class="highlight"></a>
+	<a id="control_all_d" data-parse_first="#reset_incidents_controls" data-control_element=".control.all_d" data-element_add_class="highlight"></a>
+	<a id="control_last_week" data-parse_first="#reset_incidents_controls" data-control_element=".control.last_week" data-element_add_class="highlight"></a>
+	<a id="control_last_week_d" data-parse_first="#reset_incidents_controls" data-control_element=".control.last_week_d" data-element_add_class="highlight"></a>
+	<a id="control_last_week_p" data-parse_first="#reset_incidents_controls" data-control_element=".control.last_week_p" data-element_add_class="highlight"></a>
 	<!-- viz -->
 	<a id="reset_blockgroups" data-control_element=".blockgroup" data-element_remove_class="white black poc opoc seg" data-parse="#reset_blockgroups_layer,#show_map"></a>
+
 	<a id="reset_blockgroups_layer" data-control_element=".blockgroups" data-element_remove_class="default white black poc opoc seg"></a>
-	<a id="set_white" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="white"></a>
-	<a id="set_black" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="black"></a>
-	<a id="set_poc" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="poc"></a>
-	<a id="set_opoc" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="opoc"></a>
+	<a id="set_white" data-parse_first="#reset_blockgroups,#control_white" data-control_element=".blockgroup" data-element_add_class="white"></a>
+	<a id="set_black" data-parse_first="#reset_blockgroups,#control_black" data-control_element=".blockgroup" data-element_add_class="black"></a>
+	<a id="set_poc" data-parse_first="#reset_blockgroups,#control_poc" data-control_element=".blockgroup" data-element_add_class="poc"></a>
+	<a id="set_opoc" data-parse_first="#reset_blockgroups,#control_opoc" data-control_element=".blockgroup" data-element_add_class="opoc"></a>
 	<a id="set_seg" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="seg"></a>
 
 	<!-- incidents -->
-	<a id="total_incidents" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='total'></a>
-	<a id="incidents_last_week" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='incidents_last_week'></a>
-	<a id="incidents_possession" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"column": "total_possession", "comp": "total"}'></a>
-	<a id="incidents_distribution" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"column": "total_distribution", "comp": "total"}'></a>
+	<a id="total_incidents" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='total' data-parse="#control_all"></a>
+	<a id="incidents_possession" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"column": "total_possession", "comp": "total"}' data-parse="#control_all_p"></a>
+	<a id="incidents_distribution" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"column": "total_distribution", "comp": "total"}' data-parse="#control_all_d"></a>
+	<a id="incidents_last_week" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='incidents_last_week' data-parse="#control_last_week"></a>
+	<a id="incidents_last_week_possession" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='possession_last_week' data-parse="#control_last_week_p"></a>
+	<a id="incidents_last_week_distribution" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='distribution_last_week' data-parse="#control_last_week_d"></a>
+	<a id="incidents_last_week" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='incidents_last_week' data-parse="#control_last_week"></a>
 
 </body>
 </html>
