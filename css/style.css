@@ -9,7 +9,7 @@ body,html {
 	border-bottom: 1px dashed rgba(0,0,0,0.1);
 }
 #logo {
-	width: 80%;
+	max-width: 80%;
 	height: auto;
 }
 #images img {
