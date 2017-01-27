@@ -56,7 +56,37 @@ COPY (SELECT
 		"occurred on date"::timestamp >= date_trunc ('month', CURRENT_TIMESTAMP) - interval '1 month' AND
 		"occurred on date"::timestamp < date_trunc ('month', CURRENT_TIMESTAMP) AND
 		("offense description" ILIKE '% TRAFF%' OR "offense description" ILIKE '%INTENT%' OR  "offense description" ILIKE '% SALE %')
-	) as distribution_last_month
+	) as distribution_last_month,
+	count (*) filter (WHERE
+		"offense code" = '01849' OR "offense code" = '1849'
+	) as cocaine_possession,
+	count (*) filter (WHERe
+		"offense code" = '01843' OR "offense code" = '1848'
+	) as cocaine_distribution,
+	count (*) filter (WHERE
+		"offense code" = '01842' OR "offense code" = '1842'
+	) as heroin_possession,
+	count (*) filter (WHERE
+		"offense code" = '01841' OR "offense code" = '1841'
+	) as heroin_distribution,
+	count (*) filter (WHERE 
+		"offense code" = '01844'
+	) as class_c_possession,
+	count (*) filter (WHERE
+		"offense code" = '01847'
+	) as class_c_distribution,
+	count (*) filter (WHERE
+		"offense code" = '01845' OR "offense code" = '1863'
+	) as class_d_possession,
+	count (*) filter (WHERE
+		"offense code" = '01848'
+	) as class_d_distribution,
+	count (*) filter (WHERE
+		"offense code" = '01846'
+	) as class_e_possession,
+	count (*) filter (WHERE
+		"offense code" = '01850'
+	)
 FROM 
 	(
 	SELECT
