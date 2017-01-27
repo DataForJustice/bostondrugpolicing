@@ -86,7 +86,7 @@ COPY (SELECT
 	) as class_e_possession,
 	count (*) filter (WHERE
 		"offense code" = '01850'
-	)
+	) as class_e_distribution
 FROM 
 	(
 	SELECT
