@@ -62,7 +62,7 @@
 			<table>
 				<tr>
 					<th >Race</th>
-					<th colspan="2">Incidents</th>
+					<th>Incidents</th>
 				</tr>
 				<tr>
 					<td>
@@ -83,7 +83,27 @@
 							<li><a class="incidents control last_week_d" data-click data-parse="#incidents_last_week_distribution">Last week's distribution incidents</a></li>
 						</ul>
 					</td>
+				<tr>
+					<th colspan="2">Drug Class</th>
+				</tr>
+				<tr>
 					<td>
+						<ul>
+							<li><a data-click data-parse="#cocaine_possession">Cocaine Possession</a></li>
+							<li><a data-click data-parse="#cocaine_distribution">Cocaine Distribution</a></li>
+							<li><a data-click data-parse="#heroin_possession">Heroin Possession</a></li>
+							<li><a data-click data-parse="#heroin_distribution">Heroin Distribution</a></li>
+							<li><a data-click data-parse="#class_c_possession">Class C Possession</a></li>
+							<li><a data-click data-parse="#class_c_distribution">Class C Distribution</a></li>
+						</ul>
+					</td>
+					<td>
+						<ul>
+							<li><a data-click data-parse="#class_d_possession">Class D Possession</a></li>
+							<li><a data-click data-parse="#class_d_distribution">Class D Distribution</a></li>
+							<li><a data-click data-parse="#class_e_possession">Class E Possession</a></li>
+							<li><a data-click data-parse="#class_e_distribution">Class E Distribution</a></li>
+						</ul>
 					</td>
 				</tr>
 			</table>
@@ -145,6 +165,15 @@
 	<a id="incidents_last_week_possession" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='possession_last_week' data-parse="#control_last_week_p"></a>
 	<a id="incidents_last_week_distribution" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='distribution_last_week' data-parse="#control_last_week_d"></a>
 	<a id="incidents_last_week" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='incidents_last_week' data-parse="#control_last_week"></a>
-
+	<a id="cocaine_possession" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args="cocaine_possession"></a>
+	<a id="cocaine_distribution" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args="cocaine_distribution"></a>
+	<a id="heroin_possession" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args="heroin_possession"></a>
+	<a id="heroin_distribution" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args="heroin_distribution"></a>
+	<a id="class_c_possession" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args="class_c_possession"></a>
+	<a id="class_c_distribution" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args="class_c_distribution"></a>
+	<a id="class_d_possession" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args="class_d_possession"></a>
+	<a id="class_d_distribution" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args="class_d_distribution"></a>
+	<a id="class_e_possession" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args="class_e_possession"></a>
+	<a id="class_e_distribution" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args="class_e_distribution"></a>
 </body>
 </html>
