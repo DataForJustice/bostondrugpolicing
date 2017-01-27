@@ -8,12 +8,22 @@ body,html {
 	height: 70%;
 	border-bottom: 1px dashed rgba(0,0,0,0.1);
 }
+#logo {
+	width: 80%;
+	height: auto;
+}
 #images img {
 	width: 100%;
 	height: auto;
 }
 .control.highlight {
 	color: #f9300c; 
+}
+.credits {
+	width: 40%;
+	margin: 0 auto;
+	font-size: 0.5em;
+	color: gray;
 }
 @media all and (orientation: portrait) {
 	#fixed {
